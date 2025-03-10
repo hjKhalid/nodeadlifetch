@@ -9,30 +9,14 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// const transporter = nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//         user: process.env.EMAIL_USER,
-//         pass: process.env.EMAIL_PASS,
-//     },
-// });
-// const transporter = nodemailer.createTransport({
-//   host: process.env.SMTP_HOST, // Use Hostinger SMTP
-//   port: process.env.SMTP_PORT, // Use 465 for SSL, or 587 for TLS
-//   secure: true, // true for port 465, false for 587
-//   auth: {
-//     user: process.env.EMAIL_USER, // Your Hostinger email
-//     pass: process.env.EMAIL_PASS, // Email password
-//   },
-// });
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com", // ✅ Correct Hostinger SMTP Server
   port: 465, // ✅ Use 465 for SSL, or 587 for TLS
   secure: true, // ✅ true for 465, false for 587
   auth: {
     // user: process.env.EMAIL_USER, // ✅ Your full Hostinger email
-    user: "khalid@adlifetech.com", // ✅ Your full Hostinger email
-    pass: "Klid@@@123!Ad#", // ✅ Your email password
+    user: "info@adlifetech.com", // ✅ Your full Hostinger email
+    pass: "life@@@123!A", // ✅ Your email password
     // pass: process.env.EMAIL_PASS, // ✅ Your email password
   },
 });
@@ -49,15 +33,6 @@ app.post("/send-query", async (req, res) => {
   if (!firstName || !lastName || !number || !email || !message) {
     return res.status(400).json({ error: "All fields are required" });
   }
-  /**
- * {
-    "firstName": "Khalid",
-    "lastName": "Hussain",
-    "emailId": "hk810773@gmail.com",
-    "message": "this khalid",
-    "number": "9889488202",
-   }
- */
   try {
     // Email to client
     await transporter.sendMail({
@@ -75,7 +50,7 @@ app.post("/send-query", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: process.env.ADMIN_EMAIL,
       subject: "New Query Received",
-      text: `Name: ${firstName}\nEmail: ${email}\nMessage: ${message}`,
+      text: `Name: ${firstName}\nEmail: ${email}\nMessage: ${message}\nPhone:${number}`,
     });
 
     res.status(200).json({ message: "Query submitted successfully" });
