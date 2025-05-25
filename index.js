@@ -15,8 +15,8 @@ const transporter = nodemailer.createTransport({
   secure: true, // ✅ true for 465, false for 587
   auth: {
     // user: process.env.EMAIL_USER, // ✅ Your full Hostinger email
-    user: "info@adlifetech.com", // ✅ Your full Hostinger email
-    pass: "life@@@123!A", // ✅ Your email password
+    user: "contact@adlifetech.com", // ✅ Your full Ho stinger email
+    pass: "Adact@@@123", // ✅ Your email password
     // pass: process.env.EMAIL_PASS, // ✅ Your email password
   },
 });
